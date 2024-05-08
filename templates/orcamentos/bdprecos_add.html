@@ -1,0 +1,25 @@
+{% extends "layout/base_dash.html" %}
+
+{% block head_title %} Adicionar Kit {% endblock head_title %}
+
+{% block contentdash %}
+<div class="card" style="padding: 30px;background-color: #F5F5F5;border-radius: 20px;">
+    <div class="d-flex justify-content-between">
+        <h4>Adicionar informações do kit</h4>
+        <div>
+            <a href="{% url 'inversor_add' %}" class="btn btn-primary">Adicionar Inversor</a>
+            <a href="{% url 'modulo_add' %}" class="btn btn-secondary">Adicionar Módulo</a>
+        </div>
+    </div>
+    
+    <hr>
+    <form action="{% url 'bdprecos_add' %}" method="post">
+        {% csrf_token %}
+        {{ precos_form.as_p }}
+        <div>
+            <button type="submit" class="btn btn-success">Incluir</button>
+            <a href="{% url 'banco_de_precos' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+        </form>
+</div>
+{% endblock contentdash %}

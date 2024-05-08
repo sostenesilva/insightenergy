@@ -1,0 +1,102 @@
+{% extends 'layout/base_dash.html' %}
+{% block head_title %}Dasboard{% endblock head_title %}
+
+{% block contentdash %}
+<div class="row" style="margin: 0; padding: 0;">
+    <div class="col"style="padding: 0;">
+        <div class="card" style="margin-top: 20px; padding: 30px 0 30px 0;background-color: #F5F5F5;border-radius: 20px;">
+            <div class="d-flex justify-content-between" style="padding: 0 30px 0 30px;">
+                <h5>Dados de acesso</h5>
+                <a type="button" class="btn btn-success" href="{% url 'acesso_add' %}"><i class="lni lni-plus"></i></a>
+            </div>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Fornecedor</th>
+                        <th scope="col">Login</th>
+                        <th scope="col">Senha</th>
+                        <th scope="col">Atualização</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for acesso in bd_acesso %}
+                        <tr>
+                            <td>{{ acesso.fornecedor }}</td>
+                            <td>{{ acesso.login }}</td>
+                            <td>{{ acesso.senha }}</td>
+                            <td>{{ acesso.atualizacao }}kW</td>
+                            <td>
+                                <div>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <a href="{{ acesso.link }}" target="_blank" class="btn btn-secondary  btn-sm"><i class="lni lni-arrow-top-right"></i></i></a>
+                                        <a href="{% url 'acesso_edit' acesso.id %}" class="btn btn-secondary  btn-sm"><i class="lni lni-pencil"></i></a>
+                                        <a href="{% url 'acesso_delet' acesso.id %}" class="btn btn-secondary  btn-sm" onclick="return confirm('Tem certeza que deseja excluir essa informação definitivamente?')"><i class="lni lni-trash-can"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="wrapper justify-content-center">
+                {% if bd_inversor.has_previous %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.previous_page_number}}&page_mod={{bd_modulos.number}}" style="margin-right: 30px;"><i class="lni lni-arrow-left"></i></a>
+                {% endif %}
+                <span>{{bd_inversor.number}}</span>
+                {% if bd_inversor.has_next %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.next_page_number}}&page_mod={{bd_modulos.number}}" style="margin-left: 30px;"><i class="lni lni-arrow-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="margin-top: 20px; padding: 30px 0 30px 0;background-color: #F5F5F5;border-radius: 20px;">
+            <div class="d-flex justify-content-between" style="padding: 0 30px 0 30px;">
+                <h5>Notificações</h5>
+                <a type="button" class="btn btn-success" href="{% url 'modulo_add' %}"><i class="lni lni-plus"></i></a>
+            </div>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Remetente</th>
+                        <th scope="col">Resumo</th>
+                        <th scope="col">Recebido em</th>
+                        <th scope="col">Resumo</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="table-text">
+                        <tr>
+                            <td>Remetente</td>
+                            <td>Resumo</td>
+                            <td>Recebido em</td>
+                            <td>Resumo</td>
+                            <td>
+                                <div>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <a href="#" class="btn btn-secondary btn-sm"><i class="lni lni-popup"></i></a>
+                                        <a href="#" class="btn btn-secondary  btn-sm" onclick="return confirm('Tem certeza que deseja excluir essa informação definitivamente?')"><i class="lni lni-trash-can"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <div class="wrapper justify-content-center">
+                {% if bd_modulos.has_previous %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.number}}&page_mod={{bd_modulos.previous_page_number}}" style="margin-right: 30px;"><i class="lni lni-arrow-left"></i></a>
+                {% endif %}
+                <span>{{bd_modulos.number}}</span>
+                {% if bd_modulos.has_next %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.number}}&page_mod={{bd_modulos.next_page_number}}" style="margin-left: 30px;"><i class="lni lni-arrow-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock contentdash %}

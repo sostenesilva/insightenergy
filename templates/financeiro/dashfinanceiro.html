@@ -1,0 +1,15 @@
+{% extends "layout/base_dash.html" %}
+
+{% block head_title %} Dashboard {% endblock head_title %}
+
+{% block contentdash %}
+<div class="row h-100">
+    <iframe 
+        title="Balanço Financeiro" 
+        width= 95% height= 95% 
+        src="https://app.powerbi.com/view?r=eyJrIjoiMmZiYjc0ZWMtYTllYy00NjA2LTk2YjgtMmU3NWVkZDE4ZmVl
+        IiwidCI6ImUxMWNkYmU0LWU0NWMtNDcxMC1iNjk1LThkMDhlMTUyOTMxZCJ9&pageName=ReportSection" 
+        frameborder="0" allowFullScreen="true">
+    </iframe>
+</div>
+{% endblock contentdash %}

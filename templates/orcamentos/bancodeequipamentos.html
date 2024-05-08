@@ -1,0 +1,109 @@
+{% extends "layout/base_dash.html" %}
+
+{% block head_title %} Banco de Equipamentos {% endblock head_title %}
+
+{% block contentdash %}
+<div class="row" style="margin: 0; padding: 0;">
+    <div class="col"style="padding: 0;">
+        <div class="card" style="margin-top: 20px; padding: 30px 0 30px 0;background-color: #F5F5F5;border-radius: 20px;">
+            <div class="d-flex justify-content-between" style="padding: 0 30px 0 30px;">
+                <h4>Inversores cadastrados</h4>
+                <a type="button" class="btn btn-success" href="{% url 'inversor_add' %}"><i class="lni lni-plus"></i></a>
+            </div>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Potência</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for inversor in bd_inversor %}
+                        <tr>
+                            <td>{{ inversor.tipo }}</td>
+                            <td>{{ inversor.marca }}</td>
+                            <td>{{ inversor.modelo }}</td>
+                            <td>{{ inversor.potencia }}kW</td>
+                            <td>
+                                <div>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <a href="{% url 'inversor_edit' inversor.id %}" class="btn btn-secondary  btn-sm"><i class="lni lni-pencil"></i></a>
+                                        <a href="{% url 'inversor_delet' inversor.id %}" class="btn btn-secondary  btn-sm" onclick="return confirm('Tem certeza que deseja excluir essa informação definitivamente?')"><i class="lni lni-trash-can"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="wrapper justify-content-center">
+                {% if bd_inversor.has_previous %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.previous_page_number}}&page_mod={{bd_modulos.number}}" style="margin-right: 30px;"><i class="lni lni-arrow-left"></i></a>
+                {% endif %}
+                <span>{{bd_inversor.number}}</span>
+                {% if bd_inversor.has_next %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.next_page_number}}&page_mod={{bd_modulos.number}}" style="margin-left: 30px;"><i class="lni lni-arrow-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="margin-top: 20px; padding: 30px 0 30px 0;background-color: #F5F5F5;border-radius: 20px;">
+            <div class="d-flex justify-content-between" style="padding: 0 30px 0 30px;">
+                <h4>Módulos cadastrados</h4>
+                <a type="button" class="btn btn-success" href="{% url 'modulo_add' %}"><i class="lni lni-plus"></i></a>
+            </div>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Potência</th>
+                        <th scope="col">Eficiência</th>
+                        <th scope="col">Área</th>
+                        <th scope="col">Peso</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="table-text">
+                    {% for modulo in bd_modulos %}
+                        <tr>
+                            <td>{{ modulo.marca }}</td>
+                            <td>{{ modulo.modelo }}</td>
+                            <td>{{ modulo.potencia }}</td>
+                            <td>{{ modulo.eficiencia }}</td>
+                            <td>{{ modulo.area }}</td>
+                            <td>{{ modulo.peso }}</td>
+                        
+                            <td>
+                                <div>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <a href="{% url 'modulo_edit' modulo.id %}" class="btn btn-secondary btn-sm"><i class="lni lni-pencil"></i></a>
+                                        <a href="{% url 'modulo_delet' modulo.id %}" class="btn btn-secondary  btn-sm" onclick="return confirm('Tem certeza que deseja excluir essa informação definitivamente?')"><i class="lni lni-trash-can"></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="wrapper justify-content-center">
+                {% if bd_modulos.has_previous %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.number}}&page_mod={{bd_modulos.previous_page_number}}" style="margin-right: 30px;"><i class="lni lni-arrow-left"></i></a>
+                {% endif %}
+                <span>{{bd_modulos.number}}</span>
+                {% if bd_modulos.has_next %}
+                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.number}}&page_mod={{bd_modulos.next_page_number}}" style="margin-left: 30px;"><i class="lni lni-arrow-right"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock contentdash %}

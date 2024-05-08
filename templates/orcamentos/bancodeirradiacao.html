@@ -1,0 +1,75 @@
+{% extends "layout/base_dash.html" %}
+
+{% block head_title %} Banco de Irradiação {% endblock head_title %}
+
+{% block contentdash %}
+<div class="card" style="margin-top: 20px; padding: 30px;background-color: #F5F5F5;border-radius: 20px;">
+    <div class="d-flex justify-content-between">
+        <h4>Irradiações cadastradas</h4>
+        <a type="button" class="btn btn-success" href="{% url 'irrad_add' %}"><i class="lni lni-plus"></i></a>
+    </div>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">UF</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Jan</th>
+                <th scope="col">Fev</th>
+                <th scope="col">Mar</th>
+                <th scope="col">Abr</th>
+                <th scope="col">Mai</th>
+                <th scope="col">Jun</th>
+                <th scope="col">Jul</th>
+                <th scope="col">Ago</th>
+                <th scope="col">Set</th>
+                <th scope="col">Out</th>
+                <th scope="col">Nov</th>
+                <th scope="col">Dez</th>
+                <th scope="col">Média</th>
+                <th scope="col">Última atualização</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for irrad in bdirradiacao %}
+                <tr>
+                    <td>{{ irrad.uf }}</td>
+                    <td>{{ irrad.cidade }}</td>
+                    <td>{{ irrad.irr_jan }}</td>
+                    <td>{{ irrad.irr_fev }}</td>
+                    <td>{{ irrad.irr_mar }}</td>
+                    <td>{{ irrad.irr_abr }}</td>
+                    <td>{{ irrad.irr_mai }}</td>
+                    <td>{{ irrad.irr_jun }}</td>
+                    <td>{{ irrad.irr_jul }}</td>
+                    <td>{{ irrad.irr_ago }}</td>
+                    <td>{{ irrad.irr_set }}</td>
+                    <td>{{ irrad.irr_out }}</td>
+                    <td>{{ irrad.irr_nov }}</td>
+                    <td>{{ irrad.irr_dez }}</td>
+                    <td>{{ irrad.irr_media }}</td>
+                    <td>{{ irrad.atualização }}</td>
+                    <td>
+                        <div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="{% url 'irrad_edit' irrad.id %}" class="btn btn-secondary btn-sm"><i class="lni lni-pencil"></i></a>
+                                <a href="{% url 'irrad_delet' irrad.id %}" class="btn btn-secondary btn-sm" onclick="return confirm('Tem certeza que deseja excluir essa informação definitivamente?')"><i class="lni lni-trash-can"></i></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="wrapper justify-content-center">
+        {% if bdirradiacao.has_previous %}
+            <a href="{% url 'banco_de_irradiacao' %}?page={{bdirradiacao.previous_page_number}}" style="margin-right: 30px;"><i class="lni lni-arrow-left"></i></a>
+        {% endif %}
+        <span>{{bdirradiacao.number}}</span>
+        {% if bdirradiacao.has_next %}
+            <a href="{% url 'banco_de_irradiacao' %}?page={{bdirradiacao.next_page_number}}" style="margin-left: 30px;"><i class="lni lni-arrow-right"></i></a>
+        {% endif %}
+    </div>
+</div>
+{% endblock contentdash %}

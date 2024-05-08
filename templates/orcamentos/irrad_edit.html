@@ -1,0 +1,18 @@
+{% extends "layout/base_dash.html" %}
+
+{% block head_title %} Editar Irradiação {% endblock head_title %}
+
+{% block contentdash %}
+<div class="card" style="padding: 30px;background-color: #F5F5F5;border-radius: 20px;">
+    <h6>Editar dados de irradiação</h6>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ irrad_form.as_p }}
+        <div>
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <a href="{% url 'banco_de_irradiacao' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+        </form>
+</div>
+{% endblock contentdash %}

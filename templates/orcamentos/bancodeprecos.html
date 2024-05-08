@@ -1,0 +1,60 @@
+{% extends "layout/base_dash.html" %}
+
+{% block head_title %} Banco de Preços {% endblock head_title %}
+
+{% block contentdash %}
+<div class="card" style="margin-top: 20px; padding: 30px;background-color: #F5F5F5;border-radius: 20px;">
+    <div class="d-flex justify-content-between">
+        <h4>Kits cadastrados</h4>
+        <a type="button" class="btn btn-success" href="{% url 'bdprecos_add' %}"><i class="lni lni-plus"></i></a>
+    </div>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">kWp</th>
+                <th scope="col">Fornecedor</th>
+                <th scope="col">Inversor</th>
+                <th scope="col">Qtd</th>
+                <th scope="col">Módulos</th>
+                <th scope="col">Qtd</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Atualização</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for kit in bdprecos %}
+                <tr>
+                    
+                    <td>{{ kit.potencia }}</td>
+                    <td>{{ kit.fornecedor }}</td>
+                    <td>{{ kit.inversor }}</td>
+                    <td>{{ kit.qtdInversor }}</td>
+                    <td>{{ kit.modulo }}</td>
+                    <td>{{ kit.qtdModulos }}</td>
+                    <td>{{ kit.preco }}</td>
+                    <td>{{ kit.atualizacao }}</td>
+                    <td>
+                        <div>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <a href="{% url 'bdprecos_edit' kit.id %}" class="btn btn-secondary btn-sm"><i class="lni lni-pencil"></i></a>
+                                <a href="{% url 'bdprecos_delet' kit.id %}" class="btn btn-secondary btn-sm" onclick="return confirm('Tem certeza que deseja excluir essa informação definitivamente?')"><i class="lni lni-trash-can"></i></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="wrapper justify-content-center">
+        {% if bdprecos.has_previous %}
+            <a href="{% url 'banco_de_precos' %}?page={{brprecos.previous_page_number}}" style="margin-right: 30px;"><i class="lni lni-arrow-left"></i></a>
+        {% endif %}
+        <span>{{bdprecos.number}}</span>
+        {% if bdprecos.has_next %}
+            <a href="{% url 'banco_de_precos' %}?page={{bdprecos.next_page_number}}" style="margin-left: 30px;"><i class="lni lni-arrow-right"></i></a>
+        {% endif %}
+    </div>
+</div>
+{% endblock contentdash %}

@@ -55,7 +55,7 @@
         <div class="card" style="margin-top: 20px; padding: 30px 0 30px 0;background-color: #F5F5F5;border-radius: 20px;">
             <div class="d-flex justify-content-between" style="padding: 0 30px 0 30px;">
                 <h5>Notificações</h5>
-                <a type="button" class="btn btn-success" href="{% url 'modulo_add' %}"><i class="lni lni-plus"></i></a>
+                <a type="button" class="btn btn-success" href="#"><i class="lni lni-plus"></i></a>
             </div>
             <hr>
             <table class="table table-striped">
@@ -85,15 +85,6 @@
                         </tr>
                 </tbody>
             </table>
-            <div class="wrapper justify-content-center">
-                {% if bd_modulos.has_previous %}
-                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.number}}&page_mod={{bd_modulos.previous_page_number}}" style="margin-right: 30px;"><i class="lni lni-arrow-left"></i></a>
-                {% endif %}
-                <span>{{bd_modulos.number}}</span>
-                {% if bd_modulos.has_next %}
-                    <a href="{% url 'banco_de_equipamentos' %}?page_inv={{bd_inversor.number}}&page_mod={{bd_modulos.next_page_number}}" style="margin-left: 30px;"><i class="lni lni-arrow-right"></i></a>
-                {% endif %}
-            </div>
         </div>
     </div>
 </div>
